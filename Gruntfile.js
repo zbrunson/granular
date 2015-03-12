@@ -12,17 +12,14 @@ module.exports = function(grunt) {
 				],
 				tasks: ['jshint', 'mochaTest'],
 				options: {
-					spawn: false
+					atBegin: true
 				}
 			},
 			tests: {
 				files: [
 					'tests/**/*.js'
 				],
-				tasks: ['mochaTest'],
-				options: {
-					spawn: false
-				}
+				tasks: ['mochaTest']
 			}
 		},
 
@@ -44,6 +41,7 @@ module.exports = function(grunt) {
 					'tests/**/*.js'
 				],
 				options: {
+					clearRequireCache: true,
 					require: function() {
 						process.env.PROJECT_ROOT = __dirname;
 					}
@@ -63,11 +61,21 @@ module.exports = function(grunt) {
 
 		concurrent: {
 			run: {
-				tasks: ['watch', 'jshint', 'mochaTest', 'nodemon:run'],
+				tasks: ['watch', 'nodemon:run'],
 				options: {
 					logConcurrentOutput: true
 				}
 			}
+		}
+	});
+
+	// On watch events, if the changed file is a test file then configure mochaTest to only
+	// run the tests from that file. Otherwise run all the tests
+	var defaultTestSrc = grunt.config('mochaTest.all.src');
+	grunt.event.on('watch', function(action, filepath) {
+		grunt.config('mochaTest.all.src', defaultTestSrc);
+		if (filepath.match('tests/')) {
+			grunt.config('mochaTest.all.src', filepath);
 		}
 	});
 
