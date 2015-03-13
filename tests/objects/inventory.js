@@ -15,6 +15,18 @@ describe('lib/objects/inventory.js', function() {
 		it('Has contents', function() {
 			expect(inventory.contents).to.be.an('object');
 		});
+
+		it('Initializes contents', function() {
+			var initialContents = {
+				a: 10,
+				b: 20
+			};
+			inventory = new Inventory(initialContents);
+
+			Object.keys(initialContents).forEach(function(key) {
+				expect(inventory.contents[key]).to.equal(initialContents[key]);
+			});
+		});
 	});
 });
 

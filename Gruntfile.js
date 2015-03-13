@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 			scripts: {
 				files: [
 					'index.js',
-					'lib/**/*.js'
+					'lib/**/*.js',
+					'config/**/*.js'
 				],
 				tasks: ['jshint', 'mochaTest'],
 				options: {
@@ -30,7 +31,8 @@ module.exports = function(grunt) {
 				},
 				src: [
 					'index.js',
-					'lib/**/*.js'
+					'lib/**/*.js',
+					'config/**/*.js'
 				]
 			}
 		},
