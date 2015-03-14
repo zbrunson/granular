@@ -13,7 +13,7 @@ describe('lib/objects/work_order.js', function() {
 		});
 
 		it('Has a reference to its task', function() {
-			expect(workOrder.task).to.be.a('number');
+			expect(workOrder.task).to.not.be.undefined;
 		});
 
 		it('Tracks the quantity of product of product applied to a field', function() {

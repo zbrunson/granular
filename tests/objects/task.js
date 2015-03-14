@@ -13,7 +13,7 @@ describe('lib/objects/task.js', function() {
 		});
 
 		it('Has a reference to its plan', function() {
-			expect(task.plan).to.be.a('number');
+			expect(task.plan).to.not.be.undefined;
 		});
 
 		it('Can have multiple work orders', function() {
