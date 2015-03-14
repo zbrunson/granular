@@ -8,7 +8,7 @@ var Plan = require(path.join(process.env.PROJECT_ROOT, 'lib', 'objects', 'plan')
 describe('lib/objects/plan.js', function() {
 	describe('structure', function() {
 		var plan;
-		before(function() {
+		beforeEach(function() {
 			plan = new Plan();
 		});
 

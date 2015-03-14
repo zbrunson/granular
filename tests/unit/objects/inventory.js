@@ -8,7 +8,7 @@ var Inventory = require(path.join(process.env.PROJECT_ROOT, 'lib', 'objects', 'i
 describe('lib/objects/inventory.js', function() {
 	describe('structure', function() {
 		var inventory;
-		before(function() {
+		beforeEach(function() {
 			inventory = new Inventory();
 		});
 

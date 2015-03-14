@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 		mochaTest: {
 			all: {
 				src: [
-					'tests/**/*.js'
+					'tests/unit/**/*.js'
 				],
 				options: {
 					clearRequireCache: true,
