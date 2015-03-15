@@ -124,14 +124,27 @@ describe('lib/objects/work_order.js', function() {
 		it('start', function() {
 			var calls = 0;
 			workOrder.task = {
+				product: 'a',
 				updateStatus: function() {
 					calls++;
 				}
 			};
 
+			var inventory = centralInventory.getContents();
+			inventory.a = 100;
+
+			// wrapping to keep `this` context
+			function call() {
+				workOrder.start();
+			}
+
+			workOrder.targetQuantity = 1000;
+			expect(call).to.throw(Error);
+
 			expect(workOrder.status).to.equal('not started');
 
-			workOrder.start();
+			workOrder.targetQuantity = 10;
+			expect(call).to.not.throw(Error);
 
 			expect(workOrder.status).to.equal('in progress');
 			expect(calls).to.equal(1);

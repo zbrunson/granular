@@ -24,14 +24,25 @@ describe('lib/managers/plan_manager.js', function() {
 	it('Can delete plans', function() {
 		var id = plan.id;
 
+		expect(planManager.remove(null)).to.be.false;
+
 		var task = taskManager.create(plan);
 
 		expect(taskManager.get(task.id)).to.not.be.undefined;
 		expect(planManager.get(id)).to.be.an.instanceof(Plan);
 
-		planManager.remove(id);
+		expect(planManager.remove(id)).to.be.true;
 		expect(planManager.get(id)).to.be.undefined;
 		expect(taskManager.get(task.id)).to.be.undefined;
+	});
+
+	it('Can list plans', function() {
+		var plans = planManager.list();
+
+		expect(plans).to.be.an.instanceof(Array);
+		plans.forEach(function(p) {
+			expect(p).to.be.an.instanceof(Plan);
+		});
 	});
 });
 
