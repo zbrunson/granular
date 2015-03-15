@@ -42,5 +42,14 @@ describe('lib/managers/work_order_manager.js', function() {
 		expect(workOrderManager.get(workOrder.id)).to.be.undefined;
 		expect(task.workOrders.indexOf(workOrder)).to.equal(-1);
 	});
+
+	it('Can list work orders', function() {
+		var workOrders = workOrderManager.list();
+
+		expect(workOrders).to.be.an.instanceof(Array);
+		workOrders.forEach(function(w) {
+			expect(w).to.be.an.instanceof(WorkOrder);
+		});
+	});
 });
 

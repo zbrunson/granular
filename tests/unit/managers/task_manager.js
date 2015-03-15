@@ -44,5 +44,14 @@ describe('lib/managers/task_manager.js', function() {
 		expect(taskManager.get(task.id)).to.be.undefined;
 		expect(workOrderManager.get(workOrder.id)).to.be.undefined;
 	});
+
+	it('Can list tasks', function() {
+		var tasks = taskManager.list();
+
+		expect(tasks).to.be.an.instanceof(Array);
+		tasks.forEach(function(t) {
+			expect(t).to.be.an.instanceof(Task);
+		});
+	});
 });
 
