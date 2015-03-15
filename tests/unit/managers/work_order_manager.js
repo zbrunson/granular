@@ -32,9 +32,12 @@ describe('lib/managers/work_order_manager.js', function() {
 	});
 
 	it('Can delete work orders', function() {
+		expect(workOrderManager.remove(null)).to.be.false;
+
 		expect(task.workOrders.indexOf(workOrder)).to.be.at.least(0);
 		expect(workOrderManager.get(workOrder.id)).to.be.an.instanceof(WorkOrder);
-		workOrderManager.remove(workOrder.id);
+
+		expect(workOrderManager.remove(workOrder.id)).to.be.true;
 
 		expect(workOrderManager.get(workOrder.id)).to.be.undefined;
 		expect(task.workOrders.indexOf(workOrder)).to.equal(-1);

@@ -32,6 +32,7 @@ describe('lib/managers/plan_manager.js', function() {
 		expect(planManager.get(id)).to.be.an.instanceof(Plan);
 
 		expect(planManager.remove(id)).to.be.true;
+
 		expect(planManager.get(id)).to.be.undefined;
 		expect(taskManager.get(task.id)).to.be.undefined;
 	});

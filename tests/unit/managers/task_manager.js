@@ -25,17 +25,20 @@ describe('lib/managers/task_manager.js', function() {
 		expect(task.plan).to.equal(plan);
 	});
 
-	it('Can recall plans', function() {
+	it('Can recall tasks', function() {
 		expect(taskManager.get(task.id)).to.equal(task);
 	});
 
-	it('Can delete plans', function() {
+	it('Can delete tasks', function() {
+		expect(taskManager.remove(null)).to.be.false;
+
 		var workOrder = workOrderManager.create(task);
 
 		expect(workOrderManager.get(workOrder.id)).to.not.be.undefined;
 		expect(plan.tasks.indexOf(task)).to.be.at.least(0);
 		expect(taskManager.get(task.id)).to.be.an.instanceof(Task);
-		taskManager.remove(task.id);
+
+		expect(taskManager.remove(task.id)).to.be.true;
 
 		expect(plan.tasks.indexOf(task)).to.equal(-1);
 		expect(taskManager.get(task.id)).to.be.undefined;
