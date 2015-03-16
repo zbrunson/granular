@@ -153,6 +153,7 @@ describe('lib/objects/work_order.js', function() {
 		it('complete', function() {
 			var calls = 0;
 			workOrder.task = {
+				product: 'water',
 				updateStatus: function() {
 					calls++;
 				}
@@ -160,10 +161,13 @@ describe('lib/objects/work_order.js', function() {
 
 			expect(workOrder.status).to.equal('not started');
 
+			expect(workOrder.complete).to.throw(Error);
+
+			workOrder.start();
 			workOrder.complete();
 
 			expect(workOrder.status).to.equal('completed');
-			expect(calls).to.equal(1);
+			expect(calls).to.equal(2); // 1 for fail 1 for success
 		});
 	});
 });
